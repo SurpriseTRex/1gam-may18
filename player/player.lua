@@ -4,7 +4,9 @@ local Player = class('Player')
 
 function Player:initialize()
     self.sprite = love.graphics.newImage("images/ship.png")
+    
     self.rotation = 0
+    self.rotation_speed = 0
 
     self.x = 100
     self.y = 160
@@ -13,7 +15,13 @@ function Player:initialize()
 end
 
 function Player:update(dt)
-    self.rotation = self.rotation + (0.2 * dt)
+    self.rotation = self.rotation + (self.rotation_speed * dt)
+    
+    if self.rotation_speed < 0 then
+        self.rotation_speed = self.rotation_speed + (dt * 0.1)
+    else
+        self.rotation_speed = self.rotation_speed - (dt * 0.1)
+    end
 
     local movementDir = getMovementInput()
     self.x = self.x + movementDir.x * dt * self.speed

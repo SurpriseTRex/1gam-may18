@@ -20,12 +20,19 @@ function DebrisObject:random_height() return math.random(360) end
 function DebrisObject:update(dt)
     self:move(dt)
 
-    if self:is_colliding().colliding then
+    local collision = self:is_colliding()
+    if collision.colliding then
         self.isActive = false
         table.insert(explosions, Explosion:new(10 * self.size, self.x, self.y))
         screenshake.active = true
         screenshake.timer = self.size * 0.01
         screenshake.magnitude = self.size * 0.03
+
+        if collision.collY >= player.y - 10 then
+            player.rotation_speed = player.rotation_speed + (0.1 * self.size)
+        else
+            player.rotation_speed = player.rotation_speed - (0.1 * self.size)
+        end
     end
 end
 
