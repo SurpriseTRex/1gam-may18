@@ -9,7 +9,7 @@ function Player:initialize()
     self.x = 100
     self.y = 160
 
-    self.speed = 150
+    self.speed = 15
 end
 
 function Player:update(dt)

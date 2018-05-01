@@ -23,6 +23,9 @@ function DebrisObject:update(dt)
     if self:is_colliding().colliding then
         self.isActive = false
         table.insert(explosions, Explosion:new(10 * self.size, self.x, self.y))
+        screenshake.active = true
+        screenshake.timer = self.size * 0.01
+        screenshake.magnitude = self.size * 0.03
     end
 end
 

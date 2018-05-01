@@ -31,6 +31,9 @@ function love.load()
     messages = Messages:new()
     debris = DebrisField:new(7)
     explosions = {}
+    screenshake = { active = false, duration = 0.5, timer = 0.5, magnitude = 1}
+    normal_x = 0
+    normal_y = 0
 end
 
 function love.update(dt)
@@ -43,9 +46,26 @@ function love.update(dt)
     end
 
     messages:update(dt)
+
+    if screenshake.active then
+        screenshake.timer = screenshake.timer - dt
+
+        normal_x = normal_x + screenshake.magnitude
+        normal_y = normal_y + screenshake.magnitude
+
+        if screenshake.timer <= 0 then
+            screenshake.active = false
+        end
+    end
 end
 
 function love.draw()
+    if screenshake.active then
+        local dx = love.math.random(-screenshake.magnitude, screenshake.magnitude)
+        local dy = love.math.random(-screenshake.magnitude, screenshake.magnitude)
+        love.graphics.translate(dx, dy)
+    end
+
     effect(function()
         starfield:draw()
         player:draw()
