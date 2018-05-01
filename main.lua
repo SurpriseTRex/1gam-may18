@@ -9,7 +9,6 @@ function love.load()
     SCREEN_HEIGHT = 360
 
     love.window.setMode(SCREEN_WIDTH, SCREEN_HEIGHT)
-
     love.graphics.setBackgroundColor(5, 10, 0)
 
     effect = moonshine(moonshine.effects.scanlines)
@@ -31,12 +30,17 @@ function love.load()
     player = Player:new()
     messages = Messages:new()
     debris = DebrisField:new(7)
+    explosions = {}
 end
 
 function love.update(dt)
     starfield:update(dt)
     player:update(dt)
     debris:update(dt)
+
+    for i, explosion in ipairs(explosions) do
+        explosion:update(dt)
+    end
 
     messages:update(dt)
 end
@@ -46,6 +50,10 @@ function love.draw()
         starfield:draw()
         player:draw()
         debris:draw()
+
+        for i, explosion in ipairs(explosions) do
+            explosion:draw()
+        end
 
         messages:draw()
     end)

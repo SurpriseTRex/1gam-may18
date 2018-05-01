@@ -1,4 +1,5 @@
 local class = require 'lib/middleclass'
+local Explosion = require 'debris/explosion'
 
 local DebrisObject = class("DebrisObject")
 
@@ -21,6 +22,7 @@ function DebrisObject:update(dt)
 
     if self:is_colliding().colliding then
         self.isActive = false
+        table.insert(explosions, Explosion:new(10 * self.size, self.x, self.y))
     end
 end
 
