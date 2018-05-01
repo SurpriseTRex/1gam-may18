@@ -9,7 +9,7 @@ function Player:initialize()
     self.x = 100
     self.y = 160
 
-    self.speed = 15
+    self.speed = 150
 end
 
 function Player:update(dt)
@@ -23,6 +23,8 @@ end
 function Player:draw()
     local offset_x = self.sprite:getWidth() / 2
     local offset_y = self.sprite:getHeight() / 2
+
+    love.graphics.setColor(255, 255, 255, 255)
 
     love.graphics.draw(self.sprite, self.x, self.y, self.rotation, 0.08, 0.08, offset_x, offset_y)
 end
