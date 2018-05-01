@@ -16,7 +16,6 @@ function Player:update(dt)
     self.rotation = self.rotation + (0.2 * dt)
 
     local movementDir = getMovementInput()
-    print(movementDir.x .. "/" .. movementDir.y)
     self.x = self.x + movementDir.x * dt * self.speed
     self.y = self.y + movementDir.y * dt * self.speed
 end
